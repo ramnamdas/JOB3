@@ -1,4 +1,5 @@
 #/bin/bash
+om=`sed -n "2p" hosts`
 sudo yum update -y
 java -version > /dev/null 2>&1
 if [ `echo $?` -ne 0 ]
@@ -16,5 +17,6 @@ enabled=1
 ''' | sudo  tee /etc/yum.repos.d/kibana.repo
 sudo yum -y install kibana
 sudo sed -i 's/# server.host: "0.0.0.0"/server.host: "0.0.0.0"/g' /opt/kibana/config/kibana.yml
+sudo sed -i 's/#elasticsearch.url: "http://localhost:9200"/elasticsearch.url: "http://${om}:9200"
 sudo service kibana start
 sudo service kibana status
