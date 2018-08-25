@@ -11,15 +11,14 @@ baseurl=http://packages.elasticsearch.org/logstash/2.2/centos
 gpgcheck=1
 gpgkey=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
 enabled=1
-''' |  tee /etc/yum.repos.d/logstash.repo
-yum -y install logstash
-sleep 10
+''' | sudo  tee /etc/yum.repos.d/logstash.repo
+sudo yum -y install logstash
 echo '''input {
  beats {
    port => 5044
  }
 }
-''' |  tee /etc/logstash/conf.d/02-beats-input.conf
+''' | sudo  tee /etc/logstash/conf.d/02-beats-input.conf
 echo '''filter {
  if [type] == "syslog" {
    grok {
@@ -33,7 +32,7 @@ echo '''filter {
    }
  }
 }
-''' |  tee /etc/logstash/conf.d/10-syslog-filter.conf
+''' |sudo   tee /etc/logstash/conf.d/10-syslog-filter.conf
 echo '''output {
  elasticsearch {
    hosts => ["localhost:9200"]
@@ -43,6 +42,6 @@ echo '''output {
    document_type => "%{[@metadata][type]}"
  }
 }
-''' |  tee /etc/logstash/conf.d/30-elasticsearch-output.conf
-service logstash start
-service logstash status
+''' | sudo tee /etc/logstash/conf.d/30-elasticsearch-output.conf
+sudo service logstash start
+sudo service logstash status
