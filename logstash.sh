@@ -1,4 +1,5 @@
 #!/bin/bash
+om=`sed -n "2p" hosts
 sudo yum update -y
 java -version > /dev/null 2>&1
 if [ `echo $?` -ne 0 ]
@@ -37,7 +38,7 @@ echo '''filter {
 ''' |sudo   tee /etc/logstash/conf.d/10-syslog-filter.conf
 echo '''output {
  elasticsearch {
-   hosts => ["localhost:9200"]
+   hosts => ["${om}:9200"]
    sniffing => true
    manage_template => false
    index => "om_elk%{[@metadata][beat]}-%{+YYYY.MM.dd}"
