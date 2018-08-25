@@ -7,7 +7,7 @@ then
        sleep 20
 fi
 echo "Installing Elasticsearch"
-sudo echo '''[elasticsearch-2.x]
+echo '''[elasticsearch-2.x]
 name=Elasticsearch repository for 2.x packages
 baseurl=http://packages.elastic.co/elasticsearch/2.x/centos
 gpgcheck=1
