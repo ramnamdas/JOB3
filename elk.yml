@@ -8,6 +8,10 @@
       copy:
          src: /var/lib/jenkins/workspace/JOB3/elastic.sh
          dest: /home/ec2-user/
+    - name: copy elk installation script on deployment server
+      copy:
+         src: /var/lib/jenkins/workspace/JOB3/hosts
+         dest: /home/ec2-user/
     - name: Executing elk.sh script on deployment server
       shell: sh /home/ec2-user/elastic.sh
   - hosts: kibana
