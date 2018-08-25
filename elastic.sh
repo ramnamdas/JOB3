@@ -1,5 +1,5 @@
 #/bin/bash
-om=`sed -n "4p" hosts
+om=`sed -n "4p" hosts`
 sudo yum update -y
 java -version > /dev/null 2>&1
 if [ `echo $?` -ne 0 ]
