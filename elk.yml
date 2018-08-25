@@ -4,39 +4,40 @@
     become_method: sudo
     gather_facts: no
     tasks:
-    - name: copy elk installation script on deployment server
+    - name: copy elastic.sh
       copy:
          src: /var/lib/jenkins/workspace/JOB3/elastic.sh
          dest: /home/ec2-user/
-    - name: copy elk installation script on deployment server
-      copy:
-         src: /var/lib/jenkins/workspace/JOB3/hosts
-         dest: /home/ec2-user/
-    - name: Executing elk.sh script on deployment server
+    - name: Executing elastic.sh
       shell: sh /home/ec2-user/elastic.sh
   - hosts: kibana
     become: yes
     become_method: sudo
     gather_facts: no
     tasks:
-    - name: copy elk installation script on deployment server
+    - name: copy kibana.sh
       copy:
          src: /var/lib/jenkins/workspace/JOB3/kibana.sh
          dest: /home/ec2-user/
-    - name: Executing elk.sh script on deployment server
+    - name: copy hosts for kibana
+      copy:
+         src: /var/lib/jenkins/workspace/JOB3/hosts
+         dest: /home/ec2-user/
+
+    - name: Executing kiban.sh
       shell: sh /home/ec2-user/kibana.sh
   - hosts: logstash
     become: yes
     become_method: sudo
     gather_facts: no
     tasks:
-    - name: copy elk installation script on deployment server
+    - name: copy logstash.sh
       copy:
          src: /var/lib/jenkins/workspace/JOB3/logstash.sh
          dest: /home/ec2-user/
-    - name: copy elk installation script on deployment server
+    - name: copy hosts for logstash
       copy:
          src: /var/lib/jenkins/workspace/JOB3/hosts
-         dest: /home/ec2-user/         
-    - name: Executing elk.sh script on deployment server
+         dest: /home/ec2-user/
+    - name: Executing logstash.sh
       shell: sh /home/ec2-user/logstash.sh
