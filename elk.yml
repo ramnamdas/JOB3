@@ -1,0 +1,34 @@
+---
+  - hosts: elastic
+    become: yes
+    become_method: sudo
+    gather_facts: no
+    tasks:
+    - name: copy elk installation script on deployment server
+      copy:
+         src: /var/lib/jenkins/workspace/JOB3/elastic.sh
+         dest: /home/ec2-user/
+    - name: Executing elk.sh script on deployment server
+      shell: sh /home/ec2-user/elastic.sh
+  - hosts: kibana
+    become: yes
+    become_method: sudo
+    gather_facts: no
+    tasks:
+    - name: copy elk installation script on deployment server
+      copy:
+         src: /var/lib/jenkins/workspace/JOB3/kibana.sh
+         dest: /home/ec2-user/
+    - name: Executing elk.sh script on deployment server
+      shell: sh /home/ec2-user/kibana.sh
+  - hosts: logstash
+    become: yes
+    become_method: sudo
+    gather_facts: no
+    tasks:
+    - name: copy elk installation script on deployment server
+      copy:
+         src: /var/lib/jenkins/workspace/JOB3/logstash.sh
+         dest: /home/ec2-user/
+    - name: Executing elk.sh script on deployment server
+      shell: sh /home/ec2-user/logstash.sh
