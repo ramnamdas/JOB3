@@ -17,6 +17,6 @@ enabled=1
 ''' | sudo  tee /etc/yum.repos.d/kibana.repo
 sudo yum -y install kibana
 sudo sed -i 's/# server.host: "0.0.0.0"/server.host: "0.0.0.0"/g' /opt/kibana/config/kibana.yml
-sudo sed -i 's/# elasticsearch.url: "http://localhost:9200"/elasticsearch.url: "http://${om}:9200"/g'
+sudo sed -i "s/# elasticsearch.url: \"http://localhost:9200\"/elasticsearch.url: \"http://${om}:9200\"/g'
 sudo service kibana start
 sudo service kibana status
