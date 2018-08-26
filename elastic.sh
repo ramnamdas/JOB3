@@ -1,5 +1,5 @@
 #/bin/bash
-om=`cat /var/lib/jenkins/elastic.txt`
+om=`curl http://169.254.169.254/latest/meta-data/local-ipv4`
 sudo yum update -y
 java -version > /dev/null 2>&1
 if [ `echo $?` -ne 0 ]
