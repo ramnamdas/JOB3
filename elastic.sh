@@ -1,4 +1,5 @@
 #/bin/bash
+om=`cat /var/lib/jenkins/elastic.txt`
 sudo yum update -y
 java -version > /dev/null 2>&1
 if [ `echo $?` -ne 0 ]
@@ -15,6 +16,6 @@ gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
 enabled=1
 ''' |sudo tee /etc/yum.repos.d/elasticsearch.repo
 sudo yum -y install elasticsearch
-sudo sed -i 's/# network.host: 192.168.0.1/network.host: localhost/g' /etc/elasticsearch/elasticsearch.yml
+sudo sed -i "s/# network.host: 192.168.0.1/network.host: ${om}/g" /etc/elasticsearch/elasticsearch.yml
 sudo service elasticsearch start
 sudo service elasticsearch status
