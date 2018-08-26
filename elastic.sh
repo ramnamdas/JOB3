@@ -17,5 +17,3 @@ enabled=1
 ''' |sudo tee /etc/yum.repos.d/elasticsearch.repo
 sudo yum -y install elasticsearch
 sudo sed -i "s/# network.host: 192.168.0.1/network.host: ${om}/g" /etc/elasticsearch/elasticsearch.yml
-sudo service elasticsearch start
-sudo service elasticsearch status
