@@ -1,5 +1,5 @@
 #/bin/bash
-om=`sed -n "2p" hosts`
+om=`cat /home/ec2-user/elastic.txt`
 sudo yum update -y
 java -version > /dev/null 2>&1
 if [ `echo $?` -ne 0 ]
