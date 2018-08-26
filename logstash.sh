@@ -1,13 +1,3 @@
-#!/bin/bash
-om=`sed -n "2p" hosts`
-sudo yum update -y
-java -version > /dev/null 2>&1
-if [ `echo $?` -ne 0 ]
-then
-        yum install java -y
-       sleep 20
-fi
-echo "Installing Logstash"
 echo '''[logstash-2.2]
 name=logstash repository for 2.2 packages
 baseurl=http://packages.elasticsearch.org/logstash/2.2/centos
@@ -36,15 +26,15 @@ echo '''filter {
  }
 }
 ''' |sudo   tee /etc/logstash/conf.d/10-syslog-filter.conf
-echo '''output {
+echo "output {
  elasticsearch {
-   hosts => ["${om}:9200"]
+   hosts => [\"${om}:9200\"]
    sniffing => true
    manage_template => false
-   index => "om_elk%{[@metadata][beat]}-%{+YYYY.MM.dd}"
-   document_type => "%{[@metadata][type]}"
+   index => \"om_elk%{[@metadata][beat]}-%{+YYYY.MM.dd}\"
+   document_type => \"%{[@metadata][type]}\"
  }
 }
-''' | sudo tee /etc/logstash/conf.d/30-elasticsearch-output.conf
+" | sudo tee /etc/logstash/conf.d/30-elasticsearch-output.conf
 sudo service logstash start
 sudo service logstash status
