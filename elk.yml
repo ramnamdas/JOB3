@@ -23,6 +23,10 @@
       copy:
          src: /var/lib/jenkins/workspace/JOB3/hosts
          dest: /home/ec2-user/
+    - name: copy elastic.txt for kibana
+      copy:
+         src: /var/lib/jenkins/elastic.txt
+         dest: /home/ec2-user/
 
     - name: Executing kiban.sh
       shell: sh /home/ec2-user/kibana.sh
