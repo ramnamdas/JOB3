@@ -36,5 +36,3 @@ echo "output {
  }
 }
 " | sudo tee /etc/logstash/conf.d/30-elasticsearch-output.conf
-sudo service logstash start
-sudo service logstash status
